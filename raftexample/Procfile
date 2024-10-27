@@ -1,0 +1,7 @@
+# NOTE:
+# add .exe suffix for Windows
+# raftexample4: raftexample --id 4 --addr localhost:6000 --peerids 1,2,3 --peeraddrs localhost:7000,localhost:8000,localhost:9000 --port 6666 --join
+raftexample1: raftexample --id 1 --addr localhost:7000 --peerids 2,3 --peeraddrs localhost:8000,localhost:9000 --port 7777
+raftexample2: raftexample --id 2 --addr localhost:8000 --peerids 1,3 --peeraddrs localhost:7000,localhost:9000 --port 8888
+raftexample3: raftexample --id 3 --addr localhost:9000 --peerids 1,2 --peeraddrs localhost:7000,localhost:8000 --port 9999
+
