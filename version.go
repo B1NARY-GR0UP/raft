@@ -16,5 +16,5 @@ package raft
 
 const (
 	Name    = "raft-foiver"
-	Version = "dev"
+	Version = "v0.1.0"
 )
