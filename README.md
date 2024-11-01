@@ -22,7 +22,7 @@ RAFT-FOIVER is distributed under the [Apache License 2.0](./LICENSE). The licens
 ## ECOLOGY
 
 <p align="center">
-<img src="https://github.com/justlorain/justlorain/blob/main/images/BINARY-WEB-ECO.png" alt="BINARY-WEB-ECO"/>
+<img src="https://github.com/justlorain/justlorain/blob/main/images/PROJECT-FOIVER.png" alt="PROJECT: FOIVER"/>
 <br/><br/>
-RAFT-FOIVER is a Subproject of the <a href="https://github.com/B1NARY-GR0UP">BINARY WEB ECOLOGY</a>
+RAFT is Part of <a href="https://github.com/B1NARY-GR0UP">PROJECT: FOIVER</a>
 </p>
