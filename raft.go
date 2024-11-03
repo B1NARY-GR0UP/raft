@@ -21,7 +21,6 @@ import (
 	"strings"
 
 	rt "github.com/B1NARY-GR0UP/raft/raftthrift"
-	"github.com/apache/thrift/lib/go/thrift"
 )
 
 // None should not be used as a simply number zero
@@ -437,8 +436,7 @@ func (r *raft) stepLeader(msg rt.Message) error {
 			var cc rt.ConfChange
 			if entry.Type == rt.EntryType_Config {
 				hasConfChange = true
-				deserializer := thrift.NewTDeserializer()
-				if err := deserializer.Read(&cc, entry.Data); err != nil {
+				if err := TUnmarshal(entry.Data, &cc); err != nil {
 					panic(err)
 				}
 			}

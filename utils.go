@@ -111,3 +111,8 @@ func TMarshal(ctx context.Context, data thrift.TStruct) ([]byte, error) {
 	serializer := thrift.NewTSerializer()
 	return serializer.Write(ctx, data)
 }
+
+func TUnmarshal(data []byte, v thrift.TStruct) error {
+	deserializer := thrift.NewTDeserializer()
+	return deserializer.Read(v, data)
+}
