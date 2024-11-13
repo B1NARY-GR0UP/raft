@@ -33,8 +33,6 @@ clean:
 format:
 	@gofumpt -e -d -w -extra .
 
-.PHONY: test coverage benchmark clean format
-
 raftthrift:
 	cd raftthrift
 	thriftgo -g go -o ./ raft.thrift
@@ -43,3 +41,5 @@ raftthrift:
 raftrpc:
 	cd raftrpc
 	kitex -module github.com/B1NARY-GR0UP/raft idl/rpc.thrift
+
+.PHONY: test coverage benchmark clean format raftthrift raftrpc
