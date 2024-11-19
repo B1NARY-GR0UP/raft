@@ -164,7 +164,7 @@ func (n *node) Propose(ctx context.Context, data []byte) error {
 }
 
 func (n *node) ProposeConfChange(ctx context.Context, cc rt.ConfChange) error {
-	data, err := TMarshal(ctx, &cc)
+	data, err := TMarshal(&cc)
 	if err != nil {
 		return err
 	}

@@ -228,10 +228,10 @@ func (p *ConfChangeTransition) Value() (driver.Value, error) {
 }
 
 type Entry struct {
-	Type  EntryType `thrift:"type,1" json:"type"`
-	Term  int64     `thrift:"term,2" json:"term"`
-	Index int64     `thrift:"index,3" json:"index"`
-	Data  []byte    `thrift:"data,4" json:"data"`
+	Type  EntryType `thrift:"type,1" frugal:"1,default,EntryType" json:"type"`
+	Term  int64     `thrift:"term,2" frugal:"2,default,i64" json:"term"`
+	Index int64     `thrift:"index,3" frugal:"3,default,i64" json:"index"`
+	Data  []byte    `thrift:"data,4" frugal:"4,default,binary" json:"data"`
 }
 
 func NewEntry() *Entry {
@@ -506,8 +506,8 @@ func (p *Entry) String() string {
 }
 
 type PersistentState struct {
-	CurrentTerm int64 `thrift:"current_term,1" json:"current_term"`
-	VotedFor    int64 `thrift:"voted_for,2" json:"voted_for"`
+	CurrentTerm int64 `thrift:"current_term,1" frugal:"1,default,i64" json:"current_term"`
+	VotedFor    int64 `thrift:"voted_for,2" frugal:"2,default,i64" json:"voted_for"`
 }
 
 func NewPersistentState() *PersistentState {
@@ -692,9 +692,9 @@ func (p *PersistentState) String() string {
 }
 
 type ConfState struct {
-	Voters         []int64 `thrift:"voters,1" json:"voters"`
-	VotersOutgoing []int64 `thrift:"voters_outgoing,2" json:"voters_outgoing"`
-	AutoLeave      bool    `thrift:"auto_leave,3" json:"auto_leave"`
+	Voters         []int64 `thrift:"voters,1" frugal:"1,default,list<i64>" json:"voters"`
+	VotersOutgoing []int64 `thrift:"voters_outgoing,2" frugal:"2,default,list<i64>" json:"voters_outgoing"`
+	AutoLeave      bool    `thrift:"auto_leave,3" frugal:"3,default,bool" json:"auto_leave"`
 }
 
 func NewConfState() *ConfState {
@@ -964,9 +964,9 @@ func (p *ConfState) String() string {
 }
 
 type SnapshotMetadata struct {
-	ConfState *ConfState `thrift:"conf_state,1" json:"conf_state"`
-	LastIndex int64      `thrift:"last_index,2" json:"last_index"`
-	LastTerm  int64      `thrift:"last_term,3" json:"last_term"`
+	ConfState *ConfState `thrift:"conf_state,1" frugal:"1,default,ConfState" json:"conf_state"`
+	LastIndex int64      `thrift:"last_index,2" frugal:"2,default,i64" json:"last_index"`
+	LastTerm  int64      `thrift:"last_term,3" frugal:"3,default,i64" json:"last_term"`
 }
 
 func NewSnapshotMetadata() *SnapshotMetadata {
@@ -1202,8 +1202,8 @@ func (p *SnapshotMetadata) String() string {
 }
 
 type Snapshot struct {
-	Metadata *SnapshotMetadata `thrift:"metadata,1" json:"metadata"`
-	Data     []byte            `thrift:"data,2" json:"data"`
+	Metadata *SnapshotMetadata `thrift:"metadata,1" frugal:"1,default,SnapshotMetadata" json:"metadata"`
+	Data     []byte            `thrift:"data,2" frugal:"2,default,binary" json:"data"`
 }
 
 func NewSnapshot() *Snapshot {
@@ -1394,16 +1394,16 @@ func (p *Snapshot) String() string {
 }
 
 type Message struct {
-	Type         MessageType `thrift:"type,1" json:"type"`
-	Src          int64       `thrift:"src,2" json:"src"`
-	Dst          int64       `thrift:"dst,3" json:"dst"`
-	Term         int64       `thrift:"term,4" json:"term"`
-	LogIndex     int64       `thrift:"log_index,5" json:"log_index"`
-	LogTerm      int64       `thrift:"log_term,6" json:"log_term"`
-	Entries      []*Entry    `thrift:"entries,7" json:"entries"`
-	LeaderCommit int64       `thrift:"leader_commit,8" json:"leader_commit"`
-	Snapshot     *Snapshot   `thrift:"snapshot,9" json:"snapshot"`
-	Reject       bool        `thrift:"reject,10" json:"reject"`
+	Type         MessageType `thrift:"type,1" frugal:"1,default,MessageType" json:"type"`
+	Src          int64       `thrift:"src,2" frugal:"2,default,i64" json:"src"`
+	Dst          int64       `thrift:"dst,3" frugal:"3,default,i64" json:"dst"`
+	Term         int64       `thrift:"term,4" frugal:"4,default,i64" json:"term"`
+	LogIndex     int64       `thrift:"log_index,5" frugal:"5,default,i64" json:"log_index"`
+	LogTerm      int64       `thrift:"log_term,6" frugal:"6,default,i64" json:"log_term"`
+	Entries      []*Entry    `thrift:"entries,7" frugal:"7,default,list<Entry>" json:"entries"`
+	LeaderCommit int64       `thrift:"leader_commit,8" frugal:"8,default,i64" json:"leader_commit"`
+	Snapshot     *Snapshot   `thrift:"snapshot,9" frugal:"9,default,Snapshot" json:"snapshot"`
+	Reject       bool        `thrift:"reject,10" frugal:"10,default,bool" json:"reject"`
 }
 
 func NewMessage() *Message {
@@ -1974,9 +1974,9 @@ func (p *Message) String() string {
 }
 
 type ConfChangeSingle struct {
-	Type    ConfChangeType `thrift:"type,1" json:"type"`
-	NodeID  int64          `thrift:"node_id,2" json:"node_id"`
-	NodeURL []byte         `thrift:"node_url,3" json:"node_url"`
+	Type    ConfChangeType `thrift:"type,1" frugal:"1,default,ConfChangeType" json:"type"`
+	NodeID  int64          `thrift:"node_id,2" frugal:"2,default,i64" json:"node_id"`
+	NodeURL []byte         `thrift:"node_url,3" frugal:"3,default,binary" json:"node_url"`
 }
 
 func NewConfChangeSingle() *ConfChangeSingle {
@@ -2206,8 +2206,8 @@ func (p *ConfChangeSingle) String() string {
 }
 
 type ConfChange struct {
-	Transaction ConfChangeTransition `thrift:"transaction,1" json:"transaction"`
-	Changes     []*ConfChangeSingle  `thrift:"changes,2" json:"changes"`
+	Transaction ConfChangeTransition `thrift:"transaction,1" frugal:"1,default,ConfChangeTransition" json:"transaction"`
+	Changes     []*ConfChangeSingle  `thrift:"changes,2" frugal:"2,default,list<ConfChangeSingle>" json:"changes"`
 }
 
 func NewConfChange() *ConfChange {

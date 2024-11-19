@@ -35,7 +35,7 @@ format:
 
 raftthrift:
 	cd raftthrift
-	thriftgo -g go -o ./ raft.thrift
+	thriftgo -g go:frugal_tag -o ./ raft.thrift
 	mv raft/raft.go ./ && rm -r raft
 
 raftrpc:

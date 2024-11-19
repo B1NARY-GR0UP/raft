@@ -15,7 +15,6 @@
 package raft
 
 import (
-	"context"
 	"errors"
 
 	rt "github.com/B1NARY-GR0UP/raft/raftthrift"
@@ -53,7 +52,7 @@ func (rn *RawNode) Bootstrap(peers []Peer) error {
 				},
 			},
 		}
-		data, err := TMarshal(context.Background(), &cc)
+		data, err := TMarshal(&cc)
 		if err != nil {
 			return err
 		}

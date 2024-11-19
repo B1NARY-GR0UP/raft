@@ -15,13 +15,13 @@
 package raft
 
 import (
-	"context"
 	"crypto/rand"
 	"math/big"
 	"sync"
 
 	rt "github.com/B1NARY-GR0UP/raft/raftthrift"
 	"github.com/apache/thrift/lib/go/thrift"
+	"github.com/cloudwego/frugal"
 )
 
 func IsEmptySnapshot(snapshot rt.Snapshot) bool {
@@ -107,12 +107,17 @@ func EntryPointers(entries []rt.Entry) []*rt.Entry {
 	return res
 }
 
-func TMarshal(ctx context.Context, data thrift.TStruct) ([]byte, error) {
-	serializer := thrift.NewTSerializer()
-	return serializer.Write(ctx, data)
+func TMarshal(data thrift.TStruct) ([]byte, error) {
+	buf := make([]byte, frugal.EncodedSize(data))
+	if _, err := frugal.EncodeObject(buf, nil, data); err != nil {
+		return nil, err
+	}
+	return buf, nil
 }
 
 func TUnmarshal(data []byte, v thrift.TStruct) error {
-	deserializer := thrift.NewTDeserializer()
-	return deserializer.Read(v, data)
+	if _, err := frugal.DecodeObject(data, v); err != nil {
+		return err
+	}
+	return nil
 }

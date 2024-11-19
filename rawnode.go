@@ -15,7 +15,6 @@
 package raft
 
 import (
-	"context"
 	"errors"
 
 	rt "github.com/B1NARY-GR0UP/raft/raftthrift"
@@ -77,7 +76,7 @@ func (rn *RawNode) Propose(data []byte) error {
 
 // ProposeConfChange propose config change to local node
 func (rn *RawNode) ProposeConfChange(cc rt.ConfChange) error {
-	data, err := TMarshal(context.Background(), &cc)
+	data, err := TMarshal(&cc)
 	if err != nil {
 		return err
 	}
