@@ -4,16 +4,20 @@
 
 ## Usage
 
-Use raft-foiver as a library rather than a framework.
-Please refer to the usage example in [raftexample](./raftexample).
+**Use raft-foiver as a library rather than a framework.**
 
-- [raftexample](./raftexample): Example Usage
+Please refer to the usage [example](./example).
+
 - [raftrpc](./raftrpc): RPC Transport
 - [raftthrift](./raftthrift): Thrift IDL
 
 ## Credits
 
 RAFT-FOIVER is inspired by [etcd-io/raft](https://github.com/etcd-io/raft), without which this project would not have been possible.
+
+## Blogs
+
+- [Understanding etcd's Raft Implementation: A Deep Dive into Raft Log](https://dev.to/justlorain/understanding-etcds-raft-implementation-a-deep-dive-into-raft-log-bdn)
 
 ## License
 
