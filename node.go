@@ -69,6 +69,8 @@ type Node interface {
 	ApplyConfChange(cc rt.ConfChange) *rt.ConfState
 	// Tick increments the internal logical clock for this Node. Election timeouts
 	// and heartbeat timeouts are in units of ticks.
+	//
+	// Logical clock fix the "Unreliable Clock" problem across multi machines
 	Tick()
 	// Stop the node immediately
 	Stop()
